@@ -4,7 +4,6 @@ from PyQt5.QtGui import QPixmap
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QCursor
 from datetime import datetime
-from activity import Activity
 from PyQt5.QtCore import QDateTime, Qt, QTimer
 from datetime import datetime
 import sys

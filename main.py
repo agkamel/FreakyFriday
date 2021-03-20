@@ -91,7 +91,7 @@ class Activity(QWidget):
 
     def get_data(self):
         data = []
-        data.append(str(self.restart_time))
+        data.append(str(self.start_time))
         data.append(str(self.end_time))
         data.append(str(self.duration))
         data.append(str(self.pause_count))

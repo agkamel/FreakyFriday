@@ -17,7 +17,7 @@ class Activity(QWidget):
     previous_duration = timedelta(0)
 
     def __init__(self,parent=None):
-        super(Activity, self).__init__(parent)
+        super(Activity, self).__init__()
         self.setWindowTitle('QTimer example')
 
         self.listFile=QListWidget()
@@ -73,17 +73,10 @@ class Activity(QWidget):
 
     def time_elapsed(self):
         current_time = datetime.now()
-        # if self.previous_duration is None:
-        #     self.duration = current_time - self.start_time
-        # else:
         self.duration = current_time - self.restart_time + self.previous_duration
         return self.duration
 
 class MainWindow(QWidget):
-    # self.widgets = {
-    # "button": [],
-    # "message": [],
-    # }
 
     def __init__(self):
         super().__init__()
@@ -94,23 +87,13 @@ class MainWindow(QWidget):
         layout.addWidget(self.button)
         self.setLayout(layout)
 
-    def start_activity(self, checked):
-       self.timer_window = Activity()
+    def start_activity(self):
+       self.timer_window = Activity(self)
        self.hide()
        self.timer_window.show()
-        # if self.w is None:
-        #     self.w = AnotherWindow()
-        #     self.w.show()
-
-        # else:
-        #     self.w.close()  # Close window.
-        #     self.w = None  # Discard reference.
 
 if __name__ == '__main__':
     app=QApplication(sys.argv)
-    # form=WinForm()
-    # form.show()
 window = MainWindow()
 window.show()
 sys.exit(app.exec_())
-# sys.exit(app.exec_())

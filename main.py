@@ -6,7 +6,46 @@ from PyQt5.QtGui import QCursor
 from datetime import datetime
 from PyQt5.QtCore import QDateTime, Qt, QTimer
 from datetime import datetime, timedelta
+
 import sys
+import csv
+
+
+class SaveScreen(QWidget):
+    def __init__(self,activity):
+        super(SaveScreen, self).__init__()
+        self.setWindowTitle('Save')
+        self.activity = activity
+
+        self.label=QLabel('Would you like to save this Activity?')
+        self.label.setAlignment(Qt.AlignCenter)
+        self.yesBtn=QPushButton('Yes')
+        self.noBtn=QPushButton('No, bring me home!')
+
+        saveouterlayout = QVBoxLayout()
+        labellayout = QVBoxLayout()
+        btnlayout = QGridLayout()
+    
+        labellayout.addWidget(self.label)
+        btnlayout.addWidget(self.yesBtn,0,1,1,2)
+        btnlayout.addWidget(self.noBtn,0,4,1,2)
+        saveouterlayout.addLayout(labellayout)
+        saveouterlayout.addLayout(btnlayout)
+
+        self.noBtn.clicked.connect(self.return_main)
+        self.yesBtn.clicked.connect(self.save_activity)
+        self.setLayout(saveouterlayout)
+
+    def return_main(self):
+        self.activity.return_main()
+        self.close()
+
+    def save_activity(self):
+        with open('data/activity.csv', 'a', newline='') as csvfile:
+            datawriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_NONE)
+            datawriter.writerow(self.activity.get_data())
+        self.return_main()
+
 
 class Activity(QWidget):
     start_time = None
@@ -15,6 +54,7 @@ class Activity(QWidget):
     duration = None
     pause_count = 0
     previous_duration = timedelta(0)
+
 
     def __init__(self,parent=None):
         super(Activity, self).__init__()
@@ -25,6 +65,8 @@ class Activity(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
         self.startBtn=QPushButton('Start')
         self.pauseBtn=QPushButton('Pause')
+        self.stopBtn=QPushButton('Stop')
+        self.parent = parent
 
         outerlayout = QVBoxLayout()
         labellayout = QVBoxLayout()
@@ -34,15 +76,36 @@ class Activity(QWidget):
         self.timer.timeout.connect(self.showTime)
 
         labellayout.addWidget(self.label)
-        layout.addWidget(self.startBtn,1,0)
-        layout.addWidget(self.pauseBtn,1,1)
+        layout.addWidget(self.startBtn,0,0)
+        layout.addWidget(self.pauseBtn,0,1)
+        layout.addWidget(self.stopBtn,2,0,1,2)
         outerlayout.addLayout(labellayout)
         outerlayout.addLayout(layout)
 
         self.startBtn.clicked.connect(self.startTimer)
         self.pauseBtn.clicked.connect(self.pauseTimer)
+        self.stopBtn.clicked.connect(self.show_stop_screen)
 
         self.setLayout(outerlayout)
+
+
+    def get_data(self):
+        data = []
+        data.append(str(self.restart_time))
+        data.append(str(self.end_time))
+        data.append(str(self.duration))
+        data.append(str(self.pause_count))
+        return data
+
+    def show_stop_screen(self):
+        self.end_time = datetime.now()
+        self.stop_screen = SaveScreen(self)
+        self.stop_screen.show()
+        
+    def return_main(self):
+        self.parent.show()
+        self.close()
+
 
     def showTime(self):
         current_time = datetime.now()

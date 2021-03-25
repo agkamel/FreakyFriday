@@ -146,6 +146,11 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.w = None  # No external window yet.
+<<<<<<< HEAD
+=======
+        self.textbox = QLineEdit()
+        self.textbox.setAlignment(Qt.AlignCenter)
+>>>>>>> acbb5cb459783268765763a31cf61931fe83cb22
         self.activity_list_menu = QComboBox()
         self.activity_list_menu.setEditable(True)
         self.activity_list_menu.addItems(self.get_activities())
@@ -155,6 +160,10 @@ class MainWindow(QWidget):
         self.button.clicked.connect(self.start_activity)
         layout=QGridLayout()
 
+<<<<<<< HEAD
+=======
+        layout.addWidget(self.textbox)
+>>>>>>> acbb5cb459783268765763a31cf61931fe83cb22
         layout.addWidget(self.activity_list_menu)
         layout.addWidget(self.button)
         self.setLayout(layout)

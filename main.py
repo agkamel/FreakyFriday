@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QListWidget, QGridLayout, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QListWidget, QGridLayout, QLineEdit, QComboBox
 
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtGui, QtCore
@@ -148,11 +148,13 @@ class MainWindow(QWidget):
         self.w = None  # No external window yet.
         self.textbox = QLineEdit()
         self.textbox.setAlignment(Qt.AlignCenter)
+        self.activity_list = QComboBox()
         self.button = QPushButton("Start Activity")
         self.button.clicked.connect(self.start_activity)
         layout=QGridLayout()
 
         layout.addWidget(self.textbox)
+        layout.addWidget(self.activity_list)
         layout.addWidget(self.button)
         self.setLayout(layout)
 

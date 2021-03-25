@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QListWidget, QGridLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QListWidget, QGridLayout, QLineEdit, QComboBox
 
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtGui, QtCore
@@ -48,6 +48,7 @@ class SaveScreen(QWidget):
 
 
 class Activity(QWidget):
+    activity_name = None
     start_time = None
     restart_time = None
     end_time = None
@@ -59,9 +60,9 @@ class Activity(QWidget):
     def __init__(self,parent=None):
         super(Activity, self).__init__()
         self.setWindowTitle('QTimer example')
-
+        self.activity_name = parent.textbox.text()
         self.listFile=QListWidget()
-        self.label=QLabel('Label')
+        self.label=QLabel(self.activity_name)
         self.label.setAlignment(Qt.AlignCenter)
         self.startBtn=QPushButton('Start')
         self.pauseBtn=QPushButton('Pause')
@@ -91,6 +92,7 @@ class Activity(QWidget):
 
     def get_data(self):
         data = []
+        data.append(str(self.activity_name))
         data.append(str(self.start_time))
         data.append(str(self.end_time))
         data.append(str(self.duration))
@@ -144,9 +146,15 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.w = None  # No external window yet.
+        self.textbox = QLineEdit()
+        self.textbox.setAlignment(Qt.AlignCenter)
+        self.activity_list = QComboBox()
         self.button = QPushButton("Start Activity")
         self.button.clicked.connect(self.start_activity)
         layout=QGridLayout()
+
+        layout.addWidget(self.textbox)
+        layout.addWidget(self.activity_list)
         layout.addWidget(self.button)
         self.setLayout(layout)
 

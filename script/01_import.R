@@ -12,11 +12,9 @@ library(ggplot2)
 # s/o
 
 # Settings
-# a. Directory where to save datasets
-data_dir <- "data"
-# b. Path used to import rawdata
+# a. Path used to import rawdata
 data_import <- "data/activity.csv"
-# c. Path used to export data
+# b. Path used to export data
 data_export <- "data/activity.rds"
 
 # -------------------------------------------------------------------------

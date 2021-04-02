@@ -15,7 +15,7 @@ library(ggplot2)
 # a. Directory where to save datasets
 data_dir <- "data"
 # b. Path to save datasets
-data_path <- "data/data_fake.rds"
+data_path <- "data/activity.csv"
 
 # 1 Importing data
 my_data <- read_rds(data_path)

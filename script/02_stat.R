@@ -88,29 +88,29 @@ list(
 
 
 
-"----Travail----"
+#"----Travail----"
 
-"Activité"
-"my_activity"
+#"Activité"
+#"my_activity"
 
-"Temps de travail"
-"12 minutes"
+#"Temps de travail"
+#"12 minutes"
 
-"Nombre de section de travail"
-"3"
+#"Nombre de section de travail"
+#"3"
 
-"Moyenne"
-"Écart type"
-"Min"
-"Max"
+#"Moyenne"
+#"Écart type"
+#"Min"
+#"Max"
 
-"Temps de pause"
-"15 minutes"
+#"Temps de pause"
+#"15 minutes"
 
-"Nombre de pause"
-"2"
+#"Nombre de pause"
+#"2"
 
-"Moyenne de la durée des pauses"
+#"Moyenne de la durée des pauses"
 
 
 

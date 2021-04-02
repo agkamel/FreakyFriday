@@ -48,7 +48,7 @@ class SaveScreen(QWidget):
             datawriter.writerow([self.activity.activity_name,"start", self.activity.start_time])
             for status in self.activity.pause_list:
                 datawriter.writerow([self.activity.activity_name, status[0], status[1]])
-            datawriter.writerow([self.activity.activity_name,"end", self.activity.start_time])
+            datawriter.writerow([self.activity.activity_name,"end", self.activity.end_time])
 
         self.return_main()
 
